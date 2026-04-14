@@ -16,6 +16,7 @@ from visvalization import overlay_heatmap
 BASE_DIR = Path(__file__).resolve().parent
 MODEL_PATH = BASE_DIR / "best_model.pth"
 LOCAL_VIDEO_EXTENSIONS = {".mp4", ".avi", ".mov", ".mkv"}
+NUM_FRAMES = 16
 
 
 def get_device():
@@ -45,7 +46,7 @@ def load_model():
 def predict_video(video_path):
     model, device = load_model()
 
-    frames = video_to_frames(str(video_path), num_frames=16)
+    frames = video_to_frames(str(video_path), num_frames=NUM_FRAMES)
     input_tensor = preprocess_frames(frames, val_transform).to(device)
 
     grad_cam = GradCAM(model, target_layer=model.cnn.conv_head)
@@ -195,7 +196,7 @@ def main():
 
     st.title("Deepfake Video Prediction")
     st.caption(
-        "Upload a video or choose a local sample to run the trained model and inspect Grad-CAM explanations."
+        f"Upload a video or choose a local sample to run the trained model on {NUM_FRAMES} face frames and inspect Grad-CAM explanations."
     )
 
     if not MODEL_PATH.exists():
