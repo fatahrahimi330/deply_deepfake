@@ -8,4 +8,4 @@ gradcam_top/
 *.avi
 *.mov
 *.mkv
-*.pth
+# *.pth
