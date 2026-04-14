@@ -6,6 +6,6 @@ gradcam_output.png
 gradcam_top/
 *.mp4
 *.avi
-*.mov
+# *.mov
 *.mkv
 # *.pth
